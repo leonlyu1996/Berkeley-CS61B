@@ -9,7 +9,22 @@ import static org.junit.Assert.*;
 public class TestArrayRingBuffer {
     @Test
     public void someTest() {
-        //ArrayRingBuffer arb = new ArrayRingBuffer(10);
+        ArrayRingBuffer arb = new ArrayRingBuffer(10);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void overflowTest() {
+        ArrayRingBuffer<Integer> arb = new ArrayRingBuffer<>(3);
+        arb.enqueue(1);
+        arb.enqueue(2);
+        arb.enqueue(3);
+        arb.enqueue(4);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void underflowTest() {
+        ArrayRingBuffer<Integer> arb = new ArrayRingBuffer<>(3);
+        arb.dequeue();
     }
 
     /** Calls tests for ArrayRingBuffer. */
